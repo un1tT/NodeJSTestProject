@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Bank</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <style>
+            .button {
+            display: inline-block;
+            color: rgb(28, 127, 184);
+            font-weight: 700;
+            text-decoration: none;
+            user-select: none;
+            padding: .5em 2em;
+            outline: none;
+            border: 2px solid;
+            border-radius: 1px;
+            transition: 0.2s;
+            } 
+            .button:hover { background: rgba(243, 205, 205, 0.2); }
+            .button:active { background: rgb(253, 165, 165); }
+    </style>
+    <style>
+            body {
+             font-family:"Century Gothic","CenturyGothic","AppleGothic",sans-serif ;
+            } 
+           </style>
+    <body>
+        <form id="exportform">
+            <div>
+                <h2>Export data:
+                <a href="/exchangedata" target="_blank" class="button">Export</a>
+                </h2>
+            </div>
+        </form>
+
+        <form id="importform">
+            <h2>Import file:
+            <input id="input-file-form"type="file" accept="text/xml">
+            <button type="submit" class="button">import</button>
+            </h2>
+        </form>
+
+        <script>
+            const exportForm = document.getElementById("exportform");
+            const importForm = document.getElementById("importform");
+            const file = document.getElementById("input-file-form");
+
+            exportForm.addEventListener("submit",function(event){
+                event.preventDefault();
+                axios
+                .get("/exchangedata")
+            });
+
+            importForm.addEventListener("submit",function(event){
+                event.preventDefault();
+                if (file.files.length ==0){
+                    alert("Choose xml file!");
+                    return
+                }
+                const xml = file.files[0];
+                const formData = new FormData();
+                formData.append("file",xml);
+                axios
+                .post("/exchangedata",formData)
+                .then(function(res){
+                    console.log(res)
+                })
+            })
+        </script>
+    </body>
+</html>
