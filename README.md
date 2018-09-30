@@ -25,4 +25,10 @@ node index.js
 
 Now [http://localhost:3000/](http://localhost:3000/) is available, click the link or enter in your web-browser.
 
+<h2>
+  Note:
+</h2>
+
+The DBMS of the project is MongoDB, it is based on free cloud resourse [m.lab](https://mlab.com). The data base alredy contains example data about 2 bank clients. 
+
 
